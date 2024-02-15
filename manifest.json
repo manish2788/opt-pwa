@@ -1,7 +1,7 @@
 {
     "name": "OPT PWA",
     "short_name": "OPT",
-    "start_url": "/",
+    "start_url": "/opt-pwa",
     "display": "standalone",
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
