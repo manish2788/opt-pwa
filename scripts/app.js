@@ -5,7 +5,7 @@ define(['persist/persistenceManager', 'persist/persistenceStoreManager', 'persis
     let textContent = `Your network status is ${navigator.onLine ? "Online" : "Offline"} `;
     content.textContent = textContent;
   }
-  checkNetworkStatus();
+  // checkNetworkStatus();
   let userUrl = "https://jsonplaceholder.typicode.com/todos";
   persistenceStoreManager.registerDefaultStoreFactory(pouchDBPersistenceStoreFactory);
   persistenceManager.init().then(function () {
