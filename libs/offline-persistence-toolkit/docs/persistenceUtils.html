@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Class: persistenceUtils</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script>
+      window.onload = function() {
+        var nav = document.getElementById("nav")
+        var currentId = nav.getAttribute("data-current-item");
+        if (!currentId) return;
+        var link = document.getElementById(currentId);
+        if (!link) return;
+        link.className = link.className ? link.className + " current-nav-item" : "current-nav-item";
+        nav.scrollTop = link.offsetTop + (link.offsetHeight - nav.offsetHeight)/2;
+      }
+    </script>
+
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+
+<nav id="nav" data-current-item="navItem16">
+    <h2 id="navIndex"><a href="index.html">Index</a></h2><h3>Classes</h3><ul class="subList"><li id="navItem0"><a href="ArrayPersistenceStoreFactory.html">ArrayPersistenceStoreFactory</a></li><li id="navItem1"><a href="ConfigurablePouchDBStoreFactory.html">ConfigurablePouchDBStoreFactory</a></li><li id="navItem2"><a href="DefaultResponseProxy.html">DefaultResponseProxy</a></li><li id="navItem3"><a href="FileSystemPersistenceStoreFactory.html">FileSystemPersistenceStoreFactory</a></li><li id="navItem4"><a href="LocalPersistenceStoreFactory.html">LocalPersistenceStoreFactory</a></li><li id="navItem5"><a href="OfflineCache.html">OfflineCache</a></li><li id="navItem6"><a href="PersistenceManager.html">PersistenceManager</a></li><li id="navItem7"><a href="PersistenceRegistration.html">PersistenceRegistration</a></li><li id="navItem8"><a href="PersistenceStore.html">PersistenceStore</a></li><li id="navItem9"><a href="PersistenceStoreFactory.html">PersistenceStoreFactory</a></li><li id="navItem10"><a href="PersistenceStoreManager.html">PersistenceStoreManager</a></li><li id="navItem11"><a href="PersistenceSyncManager.html">PersistenceSyncManager</a></li><li id="navItem12"><a href="PouchDBPersistenceStoreFactory.html">PouchDBPersistenceStoreFactory</a></li><li id="navItem13"><a href="cacheStrategies.html">cacheStrategies</a></li><li id="navItem14"><a href="fetchStrategies.html">fetchStrategies</a></li><li id="navItem15"><a href="oracleRestJsonShredding.html">oracleRestJsonShredding</a></li><li id="navItem16"><a href="persistenceUtils.html">persistenceUtils</a></li><li id="navItem17"><a href="queryHandlers.html">queryHandlers</a></li><li id="navItem18"><a href="simpleBinaryDataShredding.html">simpleBinaryDataShredding</a></li><li id="navItem19"><a href="simpleJsonShredding.html">simpleJsonShredding</a></li></ul><h3>Interfaces</h3><ul class="subList"><li id="navItem20"><a href="AttributeFilter.html">AttributeFilter</a></li><li id="navItem21"><a href="CompoundFilter.html">CompoundFilter</a></li><li id="navItem22"><a href="DataMapping.html">DataMapping</a></li><li id="navItem23"><a href="Item.html">Item</a></li><li id="navItem24"><a href="ItemMetadata.html">ItemMetadata</a></li><li id="navItem25"><a href="NormalizedQuery.html">NormalizedQuery</a></li></ul>
+</nav>
+
+<div id="main">
+    <h1 class="page-title">Class: persistenceUtils</h1>
+
+    
+    <p class="product-docs-header">
+
+    
+
+
+
+
+
+
+
+
+
+
+<section id="quick-nav">
+    <header><h2>QuickNav</h2></header>
+    
+
+    
+
+    
+
+    
+    <div class="quick-nav-section1">
+        <h3><a href="#methods-section">Methods</a></h3>
+        <ul class="subList">
+            
+                <li><a href="#.buildEndpointKey">.buildEndpointKey</a></li>
+            
+                <li><a href="#.isCachedResponse">.isCachedResponse</a></li>
+            
+                <li><a href="#.isGeneratedEtagResponse">.isGeneratedEtagResponse</a></li>
+            
+                <li><a href="#.parseMultipartFormData">.parseMultipartFormData</a></li>
+            
+                <li><a href="#.requestFromJSON">.requestFromJSON</a></li>
+            
+                <li><a href="#.requestToJSON">.requestToJSON</a></li>
+            
+                <li><a href="#.responseFromJSON">.responseFromJSON</a></li>
+            
+                <li><a href="#.responseToJSON">.responseToJSON</a></li>
+            
+                <li><a href="#.setResponsePayload">.setResponsePayload</a></li>
+            
+        </ul>
+        
+    </div>
+    
+    
+</section>
+
+<section>
+<header>
+  
+  
+    <h2>
+    persistenceUtils
+    
+    
+    </h2>
+  
+
+  <dl class="details">
+
+      
+      
+  </dl>
+
+  
+  
+
+  
+    <div class="class-description">Provide various utilities for converting Request/Response objects
+to JSON.</div>
+  
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        
+<dt>
+        
+    
+    
+        
+    
+
+    
+</dt>
+<dd>
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+  <dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+        
+        <h3 id="methods-section" class="subsection-title">
+            Methods
+            <a class="bookmarkable-link" title="Bookmarkable Link" href="#methods-section"></a>
+        </h3>
+
+        <dl>
+            
+                
+<dt>
+        
+    
+        
+      <h4 id=".buildEndpointKey" class="name">
+        <span class="type-signature">(static) </span>buildEndpointKey<span class="signature">(request)</span><span class="type-signature"> &rarr; {string}</span>
+        <a class="bookmarkable-link" title="Bookmarkable Link" href="#.buildEndpointKey"></a>
+      </h4>
+    
+        
+    
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        helper function to build endpoint key to register options under.
+The option contains shredder/unshredder needed for cache to shred/unshredd
+responses. Ideally, we would like cache to be able to look up such
+information in the framework based on scope, but there is no central place
+for such information to reside, considering the facts that the framework
+should work in service worker case. So the solution is for cache to
+lookup the information based on request.url, thus we require
+(1) responseProxy needs to register/unregister the options so during which
+    time period cache is able to look up shredder/unshredder
+(2) because of asynchronous nature, there could be multiple fetch events
+    going on from the same url, while we don't want the registered
+    shredder/unshredder to grow out of control, we create a unique key
+    so we can use the same key to unreigster the shredder/unshredder
+(3) any cache operations needs to happen within defaultResponseProxy
+    processRequest scope.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		        
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+            
+            <td class="type">
+            
+                
+      <span class="param-type">Request</span>
+    
+
+            
+            </td>
+            
+            
+            
+                                                           
+            <td class="description last">Request object to build the key for.
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+  <dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+    
+    
+    
+    
+        <h5>Returns:</h5>
+        
+                
+<div class="param-desc">
+    A unique key that can by used to register option under.
+</div>
+
+
+                
+    <dl>
+      <dt>
+        Type
+      </dt>
+      <dd>
+        
+      <span class="param-type">string</span>
+    
+
+      </dd>
+    </dl>
+ 
+
+            
+    
+    
+</dd>
+
+            
+                
+<dt>
+        
+    
+        
+      <h4 id=".isCachedResponse" class="name">
+        <span class="type-signature">(static) </span>isCachedResponse<span class="signature">(response)</span><span class="type-signature"> &rarr; {boolean}</span>
+        <a class="bookmarkable-link" title="Bookmarkable Link" href="#.isCachedResponse"></a>
+      </h4>
+    
+        
+    
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Return whether the Response is a cached Response
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		        
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+            
+            <td class="type">
+            
+                
+      <span class="param-type">Response</span>
+    
+
+            
+            </td>
+            
+            
+            
+                                                           
+            <td class="description last">Response object
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+  <dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+    
+    
+    
+    
+        <h5>Returns:</h5>
+        
+                
+<div class="param-desc">
+    Returns whether it's a cached Response
+</div>
+
+
+                
+    <dl>
+      <dt>
+        Type
+      </dt>
+      <dd>
+        
+      <span class="param-type">boolean</span>
+    
+
+      </dd>
+    </dl>
+ 
+
+            
+    
+    
+</dd>
+
+            
+                
+<dt>
+        
+    
+        
+      <h4 id=".isGeneratedEtagResponse" class="name">
+        <span class="type-signature">(static) </span>isGeneratedEtagResponse<span class="signature">(response)</span><span class="type-signature"> &rarr; {boolean}</span>
+        <a class="bookmarkable-link" title="Bookmarkable Link" href="#.isGeneratedEtagResponse"></a>
+      </h4>
+    
+        
+    
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Return whether the Response has a generated ETag
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		        
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+            
+            <td class="type">
+            
+                
+      <span class="param-type">Response</span>
+    
+
+            
+            </td>
+            
+            
+            
+                                                           
+            <td class="description last">Response object
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+  <dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+    
+    
+    
+    
+        <h5>Returns:</h5>
+        
+                
+<div class="param-desc">
+    Returns whether it has a generated ETag
+</div>
+
+
+                
+    <dl>
+      <dt>
+        Type
+      </dt>
+      <dd>
+        
+      <span class="param-type">boolean</span>
+    
+
+      </dd>
+    </dl>
+ 
+
+            
+    
+    
+</dd>
+
+            
+                
+<dt>
+        
+    
+        
+      <h4 id=".parseMultipartFormData" class="name">
+        <span class="type-signature">(static) </span>parseMultipartFormData<span class="signature">(origbody, contentType)</span><span class="type-signature"> &rarr; {Array}</span>
+        <a class="bookmarkable-link" title="Bookmarkable Link" href="#.parseMultipartFormData"></a>
+      </h4>
+    
+        
+    
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Parse multipart form data in the resquest/response body. Any binary data
+must be base64 encoded.
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		        
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>origbody</code></td>
+            
+            
+            <td class="type">
+            
+                
+      <span class="param-type">string</span>
+    
+
+            
+            </td>
+            
+            
+            
+                                                           
+            <td class="description last">request/response body as text
+            </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>contentType</code></td>
+            
+            
+            <td class="type">
+            
+                
+      <span class="param-type">string</span>
+    
+
+            
+            </td>
+            
+            
+            
+                                                           
+            <td class="description last">content type
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+  <dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+    
+    
+    
+    
+        <h5>Returns:</h5>
+        
+                
+<div class="param-desc">
+    Array of the parts
+</div>
+
+
+                
+    <dl>
+      <dt>
+        Type
+      </dt>
+      <dd>
+        
+      <span class="param-type">Array</span>
+    
+
+      </dd>
+    </dl>
+ 
+
+            
+    
+    
+</dd>
+
+            
+                
+<dt>
+        
+    
+        
+      <h4 id=".requestFromJSON" class="name">
+        <span class="type-signature">(static) </span>requestFromJSON<span class="signature">(data)</span><span class="type-signature"> &rarr; {Promise}</span>
+        <a class="bookmarkable-link" title="Bookmarkable Link" href="#.requestFromJSON"></a>
+      </h4>
+    
+        
+    
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Return a Request object constructed from the JSON object returned by
+requestToJSON
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		        
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+            
+            <td class="type">
+            
+                
+      <span class="param-type">Object</span>
+    
+
+            
+            </td>
+            
+            
+            
+                                                           
+            <td class="description last">JSON object returned by requestToJSON
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+  <dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+    
+    
+    
+    
+        <h5>Returns:</h5>
+        
+                
+<div class="param-desc">
+    Returns a Promise which resolves to the Request
+</div>
+
+
+                
+    <dl>
+      <dt>
+        Type
+      </dt>
+      <dd>
+        
+      <span class="param-type">Promise</span>
+    
+
+      </dd>
+    </dl>
+ 
+
+            
+    
+    
+</dd>
+
+            
+                
+<dt>
+        
+    
+        
+      <h4 id=".requestToJSON" class="name">
+        <span class="type-signature">(static) </span>requestToJSON<span class="signature">(request)</span><span class="type-signature"> &rarr; {Promise}</span>
+        <a class="bookmarkable-link" title="Bookmarkable Link" href="#.requestToJSON"></a>
+      </h4>
+    
+        
+    
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Return a JSON object representing the Request object
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		        
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+            
+            <td class="type">
+            
+                
+      <span class="param-type">Request</span>
+    
+
+            
+            </td>
+            
+            
+            
+                                                           
+            <td class="description last">Request object
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+  <dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+    
+    
+    
+    
+        <h5>Returns:</h5>
+        
+                
+<div class="param-desc">
+    Returns a Promise which resolves to the JSON object
+representing the Request
+</div>
+
+
+                
+    <dl>
+      <dt>
+        Type
+      </dt>
+      <dd>
+        
+      <span class="param-type">Promise</span>
+    
+
+      </dd>
+    </dl>
+ 
+
+            
+    
+    
+</dd>
+
+            
+                
+<dt>
+        
+    
+        
+      <h4 id=".responseFromJSON" class="name">
+        <span class="type-signature">(static) </span>responseFromJSON<span class="signature">(data)</span><span class="type-signature"> &rarr; {Promise}</span>
+        <a class="bookmarkable-link" title="Bookmarkable Link" href="#.responseFromJSON"></a>
+      </h4>
+    
+        
+    
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Return a Response object constructed from the JSON object returned by
+responseToJSON
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		        
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+            
+            <td class="type">
+            
+                
+      <span class="param-type">Object</span>
+    
+
+            
+            </td>
+            
+            
+            
+                                                           
+            <td class="description last">JSON object returned by responseToJSON
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+  <dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+    
+    
+    
+    
+        <h5>Returns:</h5>
+        
+                
+<div class="param-desc">
+    Returns a Promise which resolves to the Response
+</div>
+
+
+                
+    <dl>
+      <dt>
+        Type
+      </dt>
+      <dd>
+        
+      <span class="param-type">Promise</span>
+    
+
+      </dd>
+    </dl>
+ 
+
+            
+    
+    
+</dd>
+
+            
+                
+<dt>
+        
+    
+        
+      <h4 id=".responseToJSON" class="name">
+        <span class="type-signature">(static) </span>responseToJSON<span class="signature">(response, <span class="optional">options</span>)</span><span class="type-signature"> &rarr; {Promise}</span>
+        <a class="bookmarkable-link" title="Bookmarkable Link" href="#.responseToJSON"></a>
+      </h4>
+    
+        
+    
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Return a JSON object representing the Response object
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Argument</th>
+		
+		
+		
+		        
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+            
+            <td class="type">
+            
+                
+      <span class="param-type">Response</span>
+    
+
+            
+            </td>
+            
+                <td class="attributes">
+                
+                    
+                
+                </td>
+            
+            
+            
+                                                           
+            <td class="description last">Response object
+            </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+            
+            <td class="type">
+            
+                    
+      <span class="param-type">{excludeBody: boolean}</span>
+    
+                                   
+                
+            </td>
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                </td>
+            
+            
+            
+                                                           
+            <td class="description last">Options
+<ul>
+<li>options.excludeBody Whether to exclude body from generating the JSON object or not.</li>
+</ul>
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+  <dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+    
+    
+    
+    
+        <h5>Returns:</h5>
+        
+                
+<div class="param-desc">
+    Returns a Promise which resolves to the JSON object
+representing the Response
+</div>
+
+
+                
+    <dl>
+      <dt>
+        Type
+      </dt>
+      <dd>
+        
+      <span class="param-type">Promise</span>
+    
+
+      </dd>
+    </dl>
+ 
+
+            
+    
+    
+</dd>
+
+            
+                
+<dt>
+        
+    
+        
+      <h4 id=".setResponsePayload" class="name">
+        <span class="type-signature">(static) </span>setResponsePayload<span class="signature">(response, payload)</span><span class="type-signature"> &rarr; {Promise}</span>
+        <a class="bookmarkable-link" title="Bookmarkable Link" href="#.setResponsePayload"></a>
+      </h4>
+    
+        
+    
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Update the Response object with the provided payload. The existing payload
+will be replaced
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		        
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+            
+            <td class="type">
+            
+                
+      <span class="param-type">Response</span>
+    
+
+            
+            </td>
+            
+            
+            
+                                                           
+            <td class="description last">Response object
+            </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>payload</code></td>
+            
+            
+            <td class="type">
+            
+                
+      <span class="param-type">Object</span>
+    
+
+            
+            </td>
+            
+            
+            
+                                                           
+            <td class="description last">JSON payload data
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+  <dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+    
+    
+    
+    
+        <h5>Returns:</h5>
+        
+                
+<div class="param-desc">
+    Returns a Promise which resolves to the updated Response object
+</div>
+
+
+                
+    <dl>
+      <dt>
+        Type
+      </dt>
+      <dd>
+        
+      <span class="param-type">Promise</span>
+    
+
+      </dd>
+    </dl>
+ 
+
+            
+    
+    
+</dd>
+
+            
+        </dl>
+    
+
+    
+
+    
+
+</article>
+
+
+</section>
+
+
+
+
+    <footer>
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Tue Nov 02 2021 17:26:33 GMT-0700 (Pacific Daylight Time)<br>
+        <span class="product-docs-footer">Copyright © 2017, 2021
+        Oracle and/or its affiliates The Universal Permissive License (UPL), Version 1.0.<span>
+    </footer>
+</div>
+
+<script> prettyPrint(); </script>
+</body>
+</html>

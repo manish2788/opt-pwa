@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Interface: DataMapping</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script>
+      window.onload = function() {
+        var nav = document.getElementById("nav")
+        var currentId = nav.getAttribute("data-current-item");
+        if (!currentId) return;
+        var link = document.getElementById(currentId);
+        if (!link) return;
+        link.className = link.className ? link.className + " current-nav-item" : "current-nav-item";
+        nav.scrollTop = link.offsetTop + (link.offsetHeight - nav.offsetHeight)/2;
+      }
+    </script>
+
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+
+<nav id="nav" data-current-item="navItem22">
+    <h2 id="navIndex"><a href="index.html">Index</a></h2><h3>Classes</h3><ul class="subList"><li id="navItem0"><a href="ArrayPersistenceStoreFactory.html">ArrayPersistenceStoreFactory</a></li><li id="navItem1"><a href="ConfigurablePouchDBStoreFactory.html">ConfigurablePouchDBStoreFactory</a></li><li id="navItem2"><a href="DefaultResponseProxy.html">DefaultResponseProxy</a></li><li id="navItem3"><a href="FileSystemPersistenceStoreFactory.html">FileSystemPersistenceStoreFactory</a></li><li id="navItem4"><a href="LocalPersistenceStoreFactory.html">LocalPersistenceStoreFactory</a></li><li id="navItem5"><a href="OfflineCache.html">OfflineCache</a></li><li id="navItem6"><a href="PersistenceManager.html">PersistenceManager</a></li><li id="navItem7"><a href="PersistenceRegistration.html">PersistenceRegistration</a></li><li id="navItem8"><a href="PersistenceStore.html">PersistenceStore</a></li><li id="navItem9"><a href="PersistenceStoreFactory.html">PersistenceStoreFactory</a></li><li id="navItem10"><a href="PersistenceStoreManager.html">PersistenceStoreManager</a></li><li id="navItem11"><a href="PersistenceSyncManager.html">PersistenceSyncManager</a></li><li id="navItem12"><a href="PouchDBPersistenceStoreFactory.html">PouchDBPersistenceStoreFactory</a></li><li id="navItem13"><a href="cacheStrategies.html">cacheStrategies</a></li><li id="navItem14"><a href="fetchStrategies.html">fetchStrategies</a></li><li id="navItem15"><a href="oracleRestJsonShredding.html">oracleRestJsonShredding</a></li><li id="navItem16"><a href="persistenceUtils.html">persistenceUtils</a></li><li id="navItem17"><a href="queryHandlers.html">queryHandlers</a></li><li id="navItem18"><a href="simpleBinaryDataShredding.html">simpleBinaryDataShredding</a></li><li id="navItem19"><a href="simpleJsonShredding.html">simpleJsonShredding</a></li></ul><h3>Interfaces</h3><ul class="subList"><li id="navItem20"><a href="AttributeFilter.html">AttributeFilter</a></li><li id="navItem21"><a href="CompoundFilter.html">CompoundFilter</a></li><li id="navItem22"><a href="DataMapping.html">DataMapping</a></li><li id="navItem23"><a href="Item.html">Item</a></li><li id="navItem24"><a href="ItemMetadata.html">ItemMetadata</a></li><li id="navItem25"><a href="NormalizedQuery.html">NormalizedQuery</a></li></ul>
+</nav>
+
+<div id="main">
+    <h1 class="page-title">Interface: DataMapping</h1>
+
+    
+    <p class="product-docs-header">
+
+    
+
+
+
+
+
+
+
+
+
+
+<section id="quick-nav">
+    <header><h2>QuickNav</h2></header>
+    
+
+    
+
+    
+
+    
+    <div class="quick-nav-section1">
+        <h3><a href="#methods-section">Methods</a></h3>
+        <ul class="subList">
+            
+                <li><a href="#mapFields">mapFields</a></li>
+            
+                <li><a href="#mapFilterCriterion">mapFilterCriterion</a></li>
+            
+                <li><a href="#unmapFields">unmapFields</a></li>
+            
+        </ul>
+        
+    </div>
+    
+    
+</section>
+
+<section>
+<header>
+  
+  
+    <h2>
+    DataMapping
+    
+    
+    </h2>
+  
+
+  <dl class="details">
+
+      
+      
+  </dl>
+
+  
+  
+
+  
+    <div class="class-description">Interface for DataMapping which can be supplied to shredders/unshredders
+and queryHandlers</div>
+  
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        
+        
+        
+  <dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+        
+        <h3 id="methods-section" class="subsection-title">
+            Methods
+            <a class="bookmarkable-link" title="Bookmarkable Link" href="#methods-section"></a>
+        </h3>
+
+        <dl>
+            
+                
+<dt>
+        
+    
+        
+      <h4 id="mapFields" class="name">
+        <span class="type-signature"></span>mapFields<span class="signature">(item)</span><span class="type-signature"> &rarr; {<a href="Item.html">Item</a>}</span>
+        <a class="bookmarkable-link" title="Bookmarkable Link" href="#mapFields"></a>
+      </h4>
+    
+        
+    
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Field mapping function which takes an item and returns the mapped item
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		        
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>item</code></td>
+            
+            
+            <td class="type">
+            
+                
+      <span class="param-type"><a href="Item.html">Item</a></span>
+    
+
+            
+            </td>
+            
+            
+            
+                                                           
+            <td class="description last">
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+  <dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+    
+    
+    
+    
+        <h5>Returns:</h5>
+        
+                
+<div class="param-desc">
+    Returns the mapped item.
+<pre>
+This is typically used when there is a need to tranform the data before
+it is stored in the database. One use case would be for converting ISO Datetime
+string values to numbers to enable querying and sorting in the DB. e.g.
+<code>
+dataMapping.mapFields = function(item) {
+  var mappedItem = {};
+  mappedItem.data = {};
+  Object.keys(item.data).forEach(function(field) {
+    if (field == 'hireDate') {
+      var date = new Date(item.data[field]);
+      mappedItem.data[field] = date.getTime();
+    } else {
+      mappedItem.data[field] = item.data[field];
+    }
+  });
+  mappedItem.metadata = item.metadata;
+  return mappedItem;
+};
+</code>
+</pre>
+</div>
+
+
+                
+    <dl>
+      <dt>
+        Type
+      </dt>
+      <dd>
+        
+      <span class="param-type"><a href="Item.html">Item</a></span>
+    
+
+      </dd>
+    </dl>
+ 
+
+            
+    
+    
+</dd>
+
+            
+                
+<dt>
+        
+    
+        
+      <h4 id="mapFilterCriterion" class="name">
+        <span class="type-signature"></span>mapFilterCriterion<span class="signature">(item)</span><span class="type-signature"> &rarr; {<a href="AttributeFilter.html">AttributeFilter</a>|<a href="CompoundFilter.html">CompoundFilter</a>}</span>
+        <a class="bookmarkable-link" title="Bookmarkable Link" href="#mapFilterCriterion"></a>
+      </h4>
+    
+        
+    
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        FilterCriterion mapping function which takes filterCriterion and returns the mapped filterCriterion
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		        
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>item</code></td>
+            
+            
+            <td class="type">
+            
+                
+      <span class="param-type"><a href="AttributeFilter.html">AttributeFilter</a></span>
+    |
+
+      <span class="param-type"><a href="CompoundFilter.html">CompoundFilter</a></span>
+    
+
+            
+            </td>
+            
+            
+            
+                                                           
+            <td class="description last">
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+  <dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+    
+    
+    
+    
+        <h5>Returns:</h5>
+        
+                
+<div class="param-desc">
+    Returns the mapped filterCriterion.
+<pre>
+This is required when mapFields was used and queries are processed. e.g.
+<code>
+dataMapping.mapFilterCriterion = function(filterCriterion) {
+  if (filterCriterion && filterCriterion.attribute == 'hireDate') {
+    filterCriterion.value = (new Date(filterCriterion.value)).getTime();
+  }
+  return filterCriterion;
+};
+</code>
+</pre>
+</div>
+
+
+                
+    <dl>
+      <dt>
+        Type
+      </dt>
+      <dd>
+        
+      <span class="param-type"><a href="AttributeFilter.html">AttributeFilter</a></span>
+    |
+
+      <span class="param-type"><a href="CompoundFilter.html">CompoundFilter</a></span>
+    
+
+      </dd>
+    </dl>
+ 
+
+            
+    
+    
+</dd>
+
+            
+                
+<dt>
+        
+    
+        
+      <h4 id="unmapFields" class="name">
+        <span class="type-signature"></span>unmapFields<span class="signature">(item)</span><span class="type-signature"> &rarr; {<a href="Item.html">Item</a>}</span>
+        <a class="bookmarkable-link" title="Bookmarkable Link" href="#unmapFields"></a>
+      </h4>
+    
+        
+    
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Field unmapping function which takes a mapped item and returns the item
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		        
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>item</code></td>
+            
+            
+            <td class="type">
+            
+                
+      <span class="param-type"><a href="Item.html">Item</a></span>
+    
+
+            
+            </td>
+            
+            
+            
+                                                           
+            <td class="description last">
+            </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+  <dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+    
+    
+    
+    
+        <h5>Returns:</h5>
+        
+                
+<div class="param-desc">
+    Returns the unmapped item.
+<pre>
+This is required when mapFields was used so that we can transform
+back the data. e.g.
+<code>
+dataMapping.unmapFields = function(item) {
+  var unmappedItem = {};
+  unmappedItem.data = {};
+  Object.keys(item.data).forEach(function(field) {
+    if (field == 'hireDate') {
+      var date = new Date(item.data[field]);
+      unmappedItem.data[field] = date.toISOString();
+    } else {
+      unmappedItem.data[field] = item.data[field];
+    }
+  });
+  unmappedItem.metadata = item.metadata;
+  return unmappedItem;
+};
+</code>
+</pre>
+</div>
+
+
+                
+    <dl>
+      <dt>
+        Type
+      </dt>
+      <dd>
+        
+      <span class="param-type"><a href="Item.html">Item</a></span>
+    
+
+      </dd>
+    </dl>
+ 
+
+            
+    
+    
+</dd>
+
+            
+        </dl>
+    
+
+    
+
+    
+
+</article>
+
+
+</section>
+
+
+
+
+    <footer>
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Tue Nov 02 2021 17:26:33 GMT-0700 (Pacific Daylight Time)<br>
+        <span class="product-docs-footer">Copyright © 2017, 2021
+        Oracle and/or its affiliates The Universal Permissive License (UPL), Version 1.0.<span>
+    </footer>
+</div>
+
+<script> prettyPrint(); </script>
+</body>
+</html>

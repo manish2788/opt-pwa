@@ -1,0 +1,22 @@
+{
+  "name": "optapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "node server.js",
+    "app": "node node_modules/http-server/bin/http-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@oracle/offline-persistence-toolkit": "^1.5.7",
+    "pouchdb": "^7.3.0",
+    "pouchdb-find": "^7.3.0"
+  },
+  "devDependencies": {
+    "chrome-launcher": "^0.15.1",
+    "express": "^4.18.1",
+    "http-server": "^14.1.1"
+  }
+}

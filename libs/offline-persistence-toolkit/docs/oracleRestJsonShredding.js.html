@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Source: oracleRestJsonShredding.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script>
+      window.onload = function() {
+        var nav = document.getElementById("nav")
+        var currentId = nav.getAttribute("data-current-item");
+        if (!currentId) return;
+        var link = document.getElementById(currentId);
+        if (!link) return;
+        link.className = link.className ? link.className + " current-nav-item" : "current-nav-item";
+        nav.scrollTop = link.offsetTop + (link.offsetHeight - nav.offsetHeight)/2;
+      }
+    </script>
+
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+
+<nav id="nav" data-current-item="none">
+    <h2 id="navIndex"><a href="index.html">Index</a></h2><h3>Classes</h3><ul class="subList"><li id="navItem0"><a href="ArrayPersistenceStoreFactory.html">ArrayPersistenceStoreFactory</a></li><li id="navItem1"><a href="ConfigurablePouchDBStoreFactory.html">ConfigurablePouchDBStoreFactory</a></li><li id="navItem2"><a href="DefaultResponseProxy.html">DefaultResponseProxy</a></li><li id="navItem3"><a href="FileSystemPersistenceStoreFactory.html">FileSystemPersistenceStoreFactory</a></li><li id="navItem4"><a href="LocalPersistenceStoreFactory.html">LocalPersistenceStoreFactory</a></li><li id="navItem5"><a href="OfflineCache.html">OfflineCache</a></li><li id="navItem6"><a href="PersistenceManager.html">PersistenceManager</a></li><li id="navItem7"><a href="PersistenceRegistration.html">PersistenceRegistration</a></li><li id="navItem8"><a href="PersistenceStore.html">PersistenceStore</a></li><li id="navItem9"><a href="PersistenceStoreFactory.html">PersistenceStoreFactory</a></li><li id="navItem10"><a href="PersistenceStoreManager.html">PersistenceStoreManager</a></li><li id="navItem11"><a href="PersistenceSyncManager.html">PersistenceSyncManager</a></li><li id="navItem12"><a href="PouchDBPersistenceStoreFactory.html">PouchDBPersistenceStoreFactory</a></li><li id="navItem13"><a href="cacheStrategies.html">cacheStrategies</a></li><li id="navItem14"><a href="fetchStrategies.html">fetchStrategies</a></li><li id="navItem15"><a href="oracleRestJsonShredding.html">oracleRestJsonShredding</a></li><li id="navItem16"><a href="persistenceUtils.html">persistenceUtils</a></li><li id="navItem17"><a href="queryHandlers.html">queryHandlers</a></li><li id="navItem18"><a href="simpleBinaryDataShredding.html">simpleBinaryDataShredding</a></li><li id="navItem19"><a href="simpleJsonShredding.html">simpleJsonShredding</a></li></ul><h3>Interfaces</h3><ul class="subList"><li id="navItem20"><a href="AttributeFilter.html">AttributeFilter</a></li><li id="navItem21"><a href="CompoundFilter.html">CompoundFilter</a></li><li id="navItem22"><a href="DataMapping.html">DataMapping</a></li><li id="navItem23"><a href="Item.html">Item</a></li><li id="navItem24"><a href="ItemMetadata.html">ItemMetadata</a></li><li id="navItem25"><a href="NormalizedQuery.html">NormalizedQuery</a></li></ul>
+</nav>
+
+<div id="main">
+    <h1 class="page-title">Source: oracleRestJsonShredding.js</h1>
+
+    
+    <p class="product-docs-header">
+
+    
+
+
+
+
+
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/**
+ * Copyright (c) 2017, Oracle and/or its affiliates.
+ * All rights reserved.
+ */
+
+define(['./persistenceUtils', './impl/logger'], function (persistenceUtils, logger) {
+  'use strict';
+  
+  /**
+   * @export
+   * @class oracleRestJsonShredding
+   * @classdesc Shredder for REST services which conform to the Oracle REST standard.
+   * @hideconstructor
+   */
+  
+  /**
+   * Return the shredder for Oracle REST JSON
+   * @method
+   * @name getShredder
+   * @memberof oracleRestJsonShredding
+   * @static
+   * @param {string} storeName Name of the Persistent Store into which the shredded data should be stored
+   * @param {string|Array} idAttr The id field or array of fields in the JSON data
+   * @param {DataMapping=} dataMapping Optional dataMapping to apply to the data 
+   * @return {Function} shredder The shredder function takes a Response object as
+   * parameter and returns a Promise which resolves to an array of objects which have the following
+   * structure:
+   * &lt;code>
+   * &lt;pre>
+   * {
+   *  'name': storeName, 
+   *  'resourceIdentifier': resourceIdentifier, 
+   *  'keys': idArray, 
+   *  'data': dataArray,
+   *  'resourceType' : 'single' or 'collection'
+   * }
+   * &lt;/pre>
+   * &lt;/code>
+   */
+  var getShredder = function (storeName, idAttr, dataMapping) {
+    return function (response) {
+      logger.log("Offline Persistence Toolkit oracleRestJsonShredding: Shredding Response");
+      var responseClone = response.clone();
+      var resourceIdentifier = responseClone.headers.get('X-ORACLE-DMS-ECID');
+      return responseClone.text().then(function (payload) {
+        var idArray = [];
+        var dataArray = [];
+        var resourceType = 'collection';
+        if (payload != null &amp;&amp;
+          payload.length > 0) {
+          try {
+            var payloadJson = JSON.parse(payload);
+            if (payloadJson.items != null) {
+              idArray = payloadJson.items.map(function (jsonEntry) {
+                if (idAttr instanceof Array) {
+                  var key = [];
+                  idAttr.forEach(function(keyAttr) {
+                    key.push(jsonEntry[keyAttr])
+                  });
+                  return key;
+                }
+                return jsonEntry[idAttr];
+              });
+              dataArray = payloadJson.items;
+            } else {
+              if (idAttr instanceof Array) {
+                var key = [];
+                idAttr.forEach(function(keyAttr) {
+                  key.push(payloadJson[keyAttr])
+                });
+                idArray[0] = key;
+              } else {
+                idArray[0] = payloadJson[idAttr];
+              }
+              dataArray[0] = payloadJson;
+              resourceType = 'single';
+            }
+          } catch (err) {
+            logger.log("Offline Persistence Toolkit oracleRestJsonShredding: Error during shredding: " + err);
+          }
+        }
+        var mappedData = persistenceUtils._mapData(idArray, dataArray, dataMapping);
+        return [{
+            'name': storeName,
+            'resourceIdentifier': resourceIdentifier,
+            'keys': mappedData.keys,
+            'data': mappedData.data,
+            'resourceType' : resourceType
+          }];
+      });
+    };
+  };
+
+  /**
+   * Return the unshredder for Oracle REST JSON
+   * @method
+   * @name getUnshredder
+   * @memberof oracleRestJsonShredding
+   * @static
+   * @param {DataMapping=} dataMapping Optional dataMapping to apply to the data 
+   * @return {Function} unshredder The unshredder function takes an array of objects 
+   * and a response object as parameters. The array of objects has the following
+   * structure:
+   * &lt;code>
+   * &lt;pre>
+   * {
+   *  'name': storeName, 
+   *  'resourceIdentifier': resourceIdentifier, 
+   *  'keys': idArray, 
+   *  'data': dataArray,
+   *  'resourceType' : 'single' or 'collection'
+   * }
+   * &lt;/pre>
+   * &lt;/code>
+   * The unshredder returns a Promise which resolves to a Response object.
+   */
+  var getUnshredder = function (dataMapping) {
+    return function (data, response) {
+      logger.log("Offline Persistence Toolkit oracleRestJsonShredding: Unshredding Response");
+      if (!data || data.length !== 1) {
+        throw new Error({message: 'shredded data is not in the correct format.'});
+      }
+      var unmappedData = persistenceUtils._unmapData(data[0].keys, data[0].data, dataMapping);
+      var payload = _buildPayload([{
+        'keys': unmappedData.keys,
+        'data': unmappedData.data,
+        'resourceType' : data[0].resourceType
+      }]);
+      return persistenceUtils.setResponsePayload(response, payload).then(function (response) {
+        response.headers.set('x-oracle-jscpt-cache-expiration-date', '');
+        return response;
+      });
+    };
+  }
+
+  function _buildPayload (value) {
+    var payload;
+    var data = value[0].data;
+    if (data &amp;&amp; data.length === 1 &amp;&amp; value[0].resourceType === 'single') {
+      payload = data[0];
+    } else {
+      payload = {items: data,
+        count: data.length};
+    }
+    return payload;
+  };
+
+  return {
+    getShredder: getShredder,
+    getUnshredder: getUnshredder};
+});
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    <footer>
+        Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Tue Nov 02 2021 17:26:33 GMT-0700 (Pacific Daylight Time)<br>
+        <span class="product-docs-footer">Copyright © 2017, 2021
+        Oracle and/or its affiliates The Universal Permissive License (UPL), Version 1.0.<span>
+    </footer>
+</div>
+
+<script> prettyPrint(); </script>
+</body>
+</html>
